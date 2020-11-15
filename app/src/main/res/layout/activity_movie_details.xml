@@ -10,22 +10,25 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#191926">
+        android:background="@color/background">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:context=".MovieDetailsActivity">
 
+
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_main_title"
-                android:layout_width="1dp"
+                android:id="@+id/guidelineMainTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.40" />
+                app:layout_constraintTop_toBottomOf="@+id/imageViewTitle" />
+
 
             <ImageView
-                android:id="@+id/image_view_title"
+                android:id="@+id/imageViewTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
@@ -34,74 +37,93 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+            <ImageView
+                android:id="@+id/imageBack"
+                android:layout_width="@dimen/back_image_width"
+                android:layout_height="@dimen/back_image_height"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="56dp"
+                android:src="@drawable/ic_path"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
-                android:id="@+id/text_view_some_id"
+                android:id="@+id/textViewBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="@string/back"
+                android:textAppearance="@style/back"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintBottom_toBottomOf="@+id/imageBack"
+                app:layout_constraintStart_toStartOf="@+id/imageBack"
+                app:layout_constraintTop_toTopOf="@+id/imageBack" />
+
+
+            <TextView
+                android:id="@+id/textViewSomeId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_star_of_parent"
                 android:layout_marginBottom="24dp"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="@string/some_id"
                 android:textAppearance="@style/some_id"
-                app:layout_constraintBottom_toTopOf="@+id/text_view_title"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintBottom_toTopOf="@+id/textViewTitle"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/text_view_title"
+                android:id="@+id/textViewTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/margin_star_of_parent"
+                android:layout_marginEnd="@dimen/margin_star_of_parent"
                 android:gravity="center_vertical"
                 android:lineSpacingExtra="0sp"
                 android:text="@string/name"
-                android:textAppearance="@style/name"
+                android:textAppearance="@style/title_name"
+                android:textSize="@dimen/title_size_for_details"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/guideline_main_title" />
+                app:layout_constraintTop_toTopOf="@id/guidelineMainTitle" />
 
             <TextView
-                android:id="@+id/tag"
-                android:layout_width="343dp"
-                android:layout_height="20dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="16dp"
+                android:id="@+id/textViewTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_star_of_parent"
                 android:layout_marginTop="4dp"
                 android:gravity="center_vertical"
                 android:lineSpacingExtra="4sp"
                 android:text="@string/tag"
                 android:textAppearance="@style/tag"
+                android:textSize="@dimen/headlines_size"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_title" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
             <LinearLayout
-                android:id="@+id/liner_layout_reviews"
+                android:id="@+id/linerLayoutReviews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/margin_star_of_parent"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tag">
+                app:layout_constraintTop_toBottomOf="@+id/textViewTag">
 
                 <ImageView
-                    android:id="@+id/image_view_star_one_icon"
+                    android:id="@+id/imageViewStarOneIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_star_red_icon" />
 
                 <ImageView
-                    android:id="@+id/image_view_star_two_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingStart="5dp"
-                    android:src="@drawable/ic_star_red_icon" />
-
-                <ImageView
-                    android:id="@+id/image_view_star_three_icon"
+                    android:id="@+id/imageViewStarTwoIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -109,7 +131,7 @@
                     android:src="@drawable/ic_star_red_icon" />
 
                 <ImageView
-                    android:id="@+id/image_view_star_four_icon"
+                    android:id="@+id/imageViewStarThreeIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -117,7 +139,15 @@
                     android:src="@drawable/ic_star_red_icon" />
 
                 <ImageView
-                    android:id="@+id/image_view_star_five_icon"
+                    android:id="@+id/imageViewStarFourIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingStart="5dp"
+                    android:src="@drawable/ic_star_red_icon" />
+
+                <ImageView
+                    android:id="@+id/imageViewStarFiveIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -125,81 +155,119 @@
                     android:src="@drawable/ic_star_red_icon" />
 
                 <TextView
-                    android:id="@+id/name"
-                    android:layout_width="112dp"
-                    android:layout_height="20dp"
+                    android:id="@+id/textViewName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_star_of_parent"
                     android:gravity="center_vertical"
                     android:lineSpacingExtra="4sp"
-                    android:paddingStart="16dp"
                     android:text="@string/reviews"
-                    android:textAppearance="@style/reviews" />
-
+                    android:textAppearance="@style/reviews"
+                    android:textSize="@dimen/headlines_size" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/text_view_story_name"
+                android:id="@+id/textViewStoryName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/margin_star_of_parent"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="center_vertical"
                 android:lineSpacingExtra="4sp"
                 android:text="@string/story_name"
                 android:textAppearance="@style/story_name"
+                android:textSize="@dimen/headlines_size"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/liner_layout_reviews" />
+                app:layout_constraintTop_toBottomOf="@+id/linerLayoutReviews" />
 
             <TextView
-                android:id="@+id/after_the_d"
+                android:id="@+id/textViewStory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/margin_star_of_parent"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="center_vertical"
                 android:lineSpacingExtra="4sp"
                 android:text="@string/after_the_d"
                 android:textAppearance="@style/after_the_d"
+                android:textSize="@dimen/headlines_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_story_name" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewStoryName" />
 
             <TextView
-                android:id="@+id/text_view_heading"
+                android:id="@+id/textViewHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/margin_star_of_parent"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="center_vertical"
                 android:lineSpacingExtra="8sp"
                 android:text="@string/heading"
                 android:textAppearance="@style/heading"
+                android:textSize="@dimen/headlines_size"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/after_the_d" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewStory" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_view_image_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageViewAfterOne"
+                android:layout_width="@dimen/layout_size_image_after_for__recycler"
+                android:layout_height="@dimen/layout_size_image_after_for__recycler"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                app:cardCornerRadius="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/card_view_image_two"
+                android:scaleType="centerCrop"
+                android:src="@drawable/movie"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewAfterTwo"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_heading">
+                app:layout_constraintTop_toBottomOf="@+id/textViewHeading"
+                app:shapeAppearanceOverlay="@style/roundedImageView" />
 
-                <ImageView
-                    android:id="@+id/image_view_some_one"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/movie" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageViewAfterTwo"
+                android:layout_width="@dimen/layout_size_image_after_for__recycler"
+                android:layout_height="@dimen/layout_size_image_after_for__recycler"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/movie_two"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewAfterThree"
+                app:layout_constraintStart_toEndOf="@+id/imageViewAfterOne"
+                app:layout_constraintTop_toBottomOf="@+id/textViewHeading"
+                app:shapeAppearanceOverlay="@style/roundedImageView" />
 
-            </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageViewAfterThree"
+                android:layout_width="@dimen/layout_size_image_after_for__recycler"
+                android:layout_height="@dimen/layout_size_image_after_for__recycler"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/movie_three"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewAfterFour"
+                app:layout_constraintStart_toEndOf="@+id/imageViewAfterTwo"
+                app:layout_constraintTop_toBottomOf="@+id/textViewHeading"
+                app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageViewAfterFour"
+                android:layout_width="@dimen/layout_size_image_after_for__recycler"
+                android:layout_height="@dimen/layout_size_image_after_for__recycler"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/movie_four"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageViewAfterThree"
+                app:layout_constraintTop_toBottomOf="@+id/textViewHeading"
+                app:shapeAppearanceOverlay="@style/roundedImageView" />
 
             <TextView
                 android:id="@+id/text_view_some_one"
@@ -207,27 +275,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/name_after"
                 android:textAppearance="@style/heading"
-                app:layout_constraintEnd_toEndOf="@+id/card_view_image_one"
-                app:layout_constraintStart_toStartOf="@+id/card_view_image_one"
-                app:layout_constraintTop_toBottomOf="@+id/card_view_image_one" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_view_image_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:cardCornerRadius="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/card_view_image_three"
-                app:layout_constraintStart_toEndOf="@+id/card_view_image_one"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_heading">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/movie_two" />
-
-            </androidx.cardview.widget.CardView>
+                android:textSize="@dimen/text_size"
+                app:layout_constraintEnd_toEndOf="@+id/imageViewAfterOne"
+                app:layout_constraintStart_toStartOf="@+id/imageViewAfterOne"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewAfterOne" />
 
             <TextView
                 android:id="@+id/text_view_some_two"
@@ -235,28 +286,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/chris_evans"
                 android:textAppearance="@style/heading"
-                app:layout_constraintEnd_toEndOf="@id/card_view_image_two"
-                app:layout_constraintStart_toStartOf="@id/card_view_image_two"
-                app:layout_constraintTop_toBottomOf="@+id/card_view_image_two" />
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_view_image_three"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:cardCornerRadius="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/card_view_image_four"
-                app:layout_constraintStart_toEndOf="@+id/card_view_image_two"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_heading">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/movie_three" />
-
-            </androidx.cardview.widget.CardView>
+                android:textSize="@dimen/text_size"
+                app:layout_constraintEnd_toEndOf="@id/imageViewAfterTwo"
+                app:layout_constraintStart_toStartOf="@id/imageViewAfterTwo"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewAfterTwo" />
 
             <TextView
                 android:id="@+id/text_view_some_three"
@@ -264,28 +297,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/mark_ruffal"
                 android:textAppearance="@style/heading"
-                app:layout_constraintEnd_toEndOf="@id/card_view_image_three"
-                app:layout_constraintStart_toStartOf="@id/card_view_image_three"
-                app:layout_constraintTop_toBottomOf="@+id/card_view_image_three" />
+                android:textSize="@dimen/text_size"
+                app:layout_constraintEnd_toEndOf="@id/imageViewAfterThree"
+                app:layout_constraintStart_toStartOf="@id/imageViewAfterThree"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewAfterThree" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_view_image_four"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                app:cardCornerRadius="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/card_view_image_three"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_heading">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/movie_four" />
-
-            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/text_view_some_four"
@@ -293,26 +309,22 @@
                 android:layout_height="wrap_content"
                 android:text="@string/chris_hemsw"
                 android:textAppearance="@style/heading"
-                app:layout_constraintEnd_toEndOf="@id/card_view_image_four"
-                app:layout_constraintStart_toStartOf="@id/card_view_image_four"
-                app:layout_constraintTop_toBottomOf="@+id/card_view_image_four" />
+                android:textSize="@dimen/text_size"
+                app:layout_constraintEnd_toEndOf="@id/imageViewAfterFour"
+                app:layout_constraintStart_toStartOf="@id/imageViewAfterFour"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewAfterFour" />
 
 
-            <!--<androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="100dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_heading"
-                app:spanCount="4"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_item_movie_details" />-->
+            <!-- <androidx.recyclerview.widget.RecyclerView
+                 android:id="@+id/recycler_actors"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginStart="@dimen/margin_star_of_parent"
+                 android:layout_marginTop="7dp"
+                 android:layout_marginEnd="@dimen/margin_star_of_parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/text_view_heading" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
