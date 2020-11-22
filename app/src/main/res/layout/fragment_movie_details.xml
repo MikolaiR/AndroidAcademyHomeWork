@@ -3,10 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -240,11 +236,12 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageViewAfterOne"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/movie"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/imageViewAfterTwo"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintHorizontal_weight="1"
@@ -255,11 +252,12 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageViewAfterTwo"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/movie_two"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/imageViewAfterThree"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/imageViewAfterOne"
@@ -270,7 +268,8 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageViewAfterThree"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layout_size_image_after_for__recycler"
+                app:layout_constraintDimensionRatio="1:1"
+                android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:scaleType="fitXY"
@@ -284,7 +283,8 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageViewAfterFour"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layout_size_image_after_for__recycler"
+                app:layout_constraintDimensionRatio="1:1"
+                android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
