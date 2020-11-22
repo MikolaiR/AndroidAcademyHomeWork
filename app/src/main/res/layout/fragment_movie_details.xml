@@ -18,6 +18,20 @@
             android:layout_height="wrap_content"
             tools:context=".MovieDetailsActivity">
 
+            <!--<com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize" />
+
+            </com.google.android.material.appbar.AppBarLayout>-->
+
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineMainTitle"
@@ -54,6 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
+                android:elevation="8dp"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="@string/back"
                 android:textAppearance="@style/back"
@@ -69,6 +84,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_star_of_parent"
                 android:layout_marginBottom="24dp"
+                android:alpha="0.9"
+                android:background="@drawable/ic_rectangle"
+                android:elevation="@dimen/text_size"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="@string/some_id"
                 android:textAppearance="@style/some_id"
@@ -84,6 +102,8 @@
                 android:layout_marginEnd="@dimen/margin_star_of_parent"
                 android:gravity="center_vertical"
                 android:lineSpacingExtra="0sp"
+                android:shadowColor="@android:color/black"
+                android:shadowDy="10"
                 android:text="@string/name"
                 android:textAppearance="@style/title_name"
                 android:textSize="@dimen/title_size_for_details"
@@ -127,7 +147,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:paddingStart="5dp"
+                    android:layout_marginStart="5dp"
                     android:src="@drawable/ic_star_red_icon" />
 
                 <ImageView
@@ -135,7 +155,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:paddingStart="5dp"
+                    android:layout_marginStart="5dp"
                     android:src="@drawable/ic_star_red_icon" />
 
                 <ImageView
@@ -143,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:paddingStart="5dp"
+                    android:layout_marginStart="5dp"
                     android:src="@drawable/ic_star_red_icon" />
 
                 <ImageView
@@ -151,8 +171,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:paddingStart="5dp"
-                    android:src="@drawable/ic_star_red_icon" />
+                    android:layout_marginStart="5dp"
+                    android:src="@drawable/ic_star_icon_white" />
 
                 <TextView
                     android:id="@+id/textViewName"
@@ -161,6 +181,8 @@
                     android:layout_marginStart="@dimen/margin_star_of_parent"
                     android:gravity="center_vertical"
                     android:lineSpacingExtra="4sp"
+                    android:shadowColor="@android:color/black"
+                    android:shadowDy="8"
                     android:text="@string/reviews"
                     android:textAppearance="@style/reviews"
                     android:textSize="@dimen/headlines_size" />
@@ -217,26 +239,29 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageViewAfterOne"
-                android:layout_width="@dimen/layout_size_image_after_for__recycler"
-                android:layout_height="@dimen/layout_size_image_after_for__recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:src="@drawable/movie"
                 app:layout_constraintEnd_toStartOf="@+id/imageViewAfterTwo"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewHeading"
                 app:shapeAppearanceOverlay="@style/roundedImageView" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageViewAfterTwo"
-                android:layout_width="@dimen/layout_size_image_after_for__recycler"
-                android:layout_height="@dimen/layout_size_image_after_for__recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:src="@drawable/movie_two"
                 app:layout_constraintEnd_toStartOf="@+id/imageViewAfterThree"
+                app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/imageViewAfterOne"
                 app:layout_constraintTop_toBottomOf="@+id/textViewHeading"
                 app:shapeAppearanceOverlay="@style/roundedImageView" />
@@ -244,27 +269,29 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageViewAfterThree"
-                android:layout_width="@dimen/layout_size_image_after_for__recycler"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/layout_size_image_after_for__recycler"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:src="@drawable/movie_three"
                 app:layout_constraintEnd_toStartOf="@+id/imageViewAfterFour"
+                app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/imageViewAfterTwo"
                 app:layout_constraintTop_toBottomOf="@+id/textViewHeading"
                 app:shapeAppearanceOverlay="@style/roundedImageView" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageViewAfterFour"
-                android:layout_width="@dimen/layout_size_image_after_for__recycler"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/layout_size_image_after_for__recycler"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:src="@drawable/movie_four"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/imageViewAfterThree"
                 app:layout_constraintTop_toBottomOf="@+id/textViewHeading"
                 app:shapeAppearanceOverlay="@style/roundedImageView" />
