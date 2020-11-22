@@ -9,7 +9,6 @@
         android:id="@+id/someIdTextView"
         android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
-        android:text="13+"
         android:layout_marginStart="6dp"
         android:textSize="@dimen/text_size"
         android:layout_height="wrap_content"

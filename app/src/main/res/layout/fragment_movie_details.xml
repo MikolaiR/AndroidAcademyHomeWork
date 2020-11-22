@@ -14,21 +14,6 @@
             android:layout_height="wrap_content"
             tools:context=".MovieDetailsActivity">
 
-            <!--<com.google.android.material.appbar.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize" />
-
-            </com.google.android.material.appbar.AppBarLayout>-->
-
-
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineMainTitle"
                 android:layout_width="wrap_content"
@@ -47,32 +32,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
-            <ImageView
-                android:id="@+id/imageBack"
-                android:layout_width="@dimen/back_image_width"
-                android:layout_height="@dimen/back_image_height"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="56dp"
-                android:src="@drawable/ic_path"
+            <Button
+                android:id="@+id/buttonBack"
+                android:layout_marginTop="44dp"
+                android:layout_marginStart="@dimen/margin_star_of_parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textViewBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="8dp"
-                android:elevation="8dp"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="@string/back"
-                android:textAppearance="@style/back"
+                android:drawableLeft="@drawable/ic_path"
+                android:background="@android:color/transparent"
                 android:textSize="@dimen/text_size"
-                app:layout_constraintBottom_toBottomOf="@+id/imageBack"
-                app:layout_constraintStart_toStartOf="@+id/imageBack"
-                app:layout_constraintTop_toTopOf="@+id/imageBack" />
-
+                android:textAppearance="@style/back"
+                android:text="@string/back"/>
 
             <TextView
                 android:id="@+id/textViewSomeId"
@@ -268,12 +241,12 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageViewAfterThree"
                 android:layout_width="0dp"
-                app:layout_constraintDimensionRatio="1:1"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/movie_three"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/imageViewAfterFour"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/imageViewAfterTwo"
@@ -283,13 +256,13 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageViewAfterFour"
                 android:layout_width="0dp"
-                app:layout_constraintDimensionRatio="1:1"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/movie_four"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/imageViewAfterThree"
