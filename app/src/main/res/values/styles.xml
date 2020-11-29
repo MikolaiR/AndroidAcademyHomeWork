@@ -4,10 +4,6 @@
     <style name="title_movie_name">
         <item name="android:letterSpacing">-0.01</item>
         <item name="android:textColor">#ECECEC</item>
-        <item name="android:shadowColor">#80000000</item>
-        <item name="android:shadowDx">0</item>
-        <item name="android:shadowDy">6</item>
-        <item name="android:shadowRadius">12</item>
     </style>
 
     <style name="age_limit">
@@ -57,4 +53,14 @@
         <item name="android:textColor">#D8D8D8</item>
     </style>
 
+    <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/rating_stars</item>
+        <item name="android:minHeight">8dip</item>
+        <item name="android:maxHeight">22dip</item>
+    </style>
+
 </resources>
+
+<!--
+<item name="colorControlNormal">#6D6D80</item>
+<item name="colorControlActivated">#FF3365</item>-->
