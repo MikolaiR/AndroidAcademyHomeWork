@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">AndroidAcademyHomeWork</string>
     <string name="name_movie">Avengers: \nEnd Game</string>
+    <string name="name_movie_l">Avengers: End Game</string>
     <string name="age_limit">13+</string>
     <string name="movie_genre">Action, Adventure, Fantasy</string>
     <string name="reviews">125 Reviews</string>
@@ -12,5 +13,7 @@
     <string name="chris_hemsworth">Chris Hemsworth</string>
     <string name="cast">Cast</string>
     <string name="back">Back</string>
+    <string name="movies_list">Movies list</string>
+    <string name="_127_min">127 min</string>
 
 </resources>
