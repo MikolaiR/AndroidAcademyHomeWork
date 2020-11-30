@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +10,7 @@
     tools:context=".UI.MovieListFragment">
 
     <Button
-        android:id="@+id/buttonViewBack"
+        android:id="@+id/buttonViewMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_star_of_parent"
@@ -24,6 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutMovieOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -31,7 +33,7 @@
         android:padding="2dp"
         android:background="@drawable/backgraund_for_movie_list_item"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonViewBack">
+        app:layout_constraintTop_toBottomOf="@+id/buttonViewMenu">
 
         <ImageView
             android:id="@+id/imageViewTitleBackground"
@@ -82,7 +84,7 @@
             android:lineSpacingExtra="3sp"
             android:text="@string/movie_genre"
             android:textAppearance="@style/movie_genre"
-            android:textSize="8sp"
+            android:textSize="@dimen/body_text_size_for_movie_list"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/imageViewStarOneIcon" />
 
