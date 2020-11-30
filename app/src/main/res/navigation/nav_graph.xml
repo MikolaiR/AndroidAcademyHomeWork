@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/movieDetailsFragment">
+    app:startDestination="@id/movieListFragment">
 
     <fragment
         android:id="@+id/movieListFragment"
@@ -21,7 +21,9 @@
         tools:layout="@layout/fragment_movie_details">
         <action
             android:id="@+id/action_movieDetailsFragment_to_movieListFragment"
-            app:destination="@id/movieListFragment" />
+            app:destination="@id/movieListFragment"
+            app:popUpTo="@id/movieListFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 </navigation>
