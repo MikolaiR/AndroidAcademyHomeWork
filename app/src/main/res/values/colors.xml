@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background">#191926</color>
+    <color name="duration_movie">#565665</color>
 </resources>

@@ -11,10 +11,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".MovieDetailsActivity">
+        tools:context=".ui.MovieDetailsFragment">
 
         <ImageView
-            android:id="@+id/imageViewTitleBackground"
+            android:id="@+id/imageViewDetailFragmentTitleBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
@@ -27,188 +27,189 @@
             android:id="@+id/buttonViewBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_star_of_parent"
-            android:layout_marginTop="44dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_44"
             android:background="@android:color/transparent"
             android:drawableLeft="@drawable/ic_path"
             android:gravity="center"
             android:text="@string/back"
             android:textAppearance="@style/button_back"
-            android:textSize="@dimen/body_text_size"
+            android:textSize="@dimen/sp_12"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textViewAgeLimit"
+            android:id="@+id/textViewDetailFragmentAgeLimit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_star_of_parent"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="@dimen/dp_24"
             android:alpha="0.9"
             android:background="@drawable/ic_rectangle"
             android:gravity="center"
             android:text="@string/age_limit"
             android:textAppearance="@style/age_limit"
-            android:textSize="@dimen/body_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/textViewNameMove"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toTopOf="@+id/textViewDetailFragmentNameMove"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/textViewNameMove"
+            android:id="@+id/textViewDetailFragmentNameMove"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_star_of_parent"
-            android:layout_marginEnd="@dimen/margin_end_of_parent"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
             android:gravity="center_vertical"
             android:lineSpacingExtra="0sp"
             android:shadowColor="@android:color/black"
             android:shadowDy="10"
             android:text="@string/name_movie"
             android:textAppearance="@style/title_movie_name"
-            android:textSize="@dimen/size_for_title_movie_name"
+            android:textSize="@dimen/sp_40"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageViewTitleBackground" />
+            app:layout_constraintTop_toBottomOf="@id/imageViewDetailFragmentTitleBackground" />
 
         <TextView
-            android:id="@+id/textViewMovieGenre"
+            android:id="@+id/textViewDetailFragmentMovieGenre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_star_of_parent"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_4"
             android:gravity="center_vertical"
-            android:lineSpacingExtra="4sp"
+            android:lineSpacingExtra="@dimen/sp_4"
             android:text="@string/movie_genre"
             android:textAppearance="@style/movie_genre"
-            android:textSize="@dimen/size_of_headers"
+            android:textSize="@dimen/sp_14"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewNameMove" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewDetailFragmentNameMove" />
 
 
         <ImageView
-            android:id="@+id/imageViewStarOneIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/imageViewDetailFragmentStarOneIcon"
+            android:layout_width="@dimen/dp_13"
+            android:layout_height="@dimen/dp_12"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/margin_star_of_parent"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
             android:src="@drawable/ic_star_red_icon"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewMovieGenre" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewDetailFragmentMovieGenre" />
 
         <ImageView
-            android:id="@+id/imageViewStarTwoIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/imageViewDetailFragmentStarTwoIcon"
+            android:layout_width="@dimen/dp_13"
+            android:layout_height="@dimen/dp_12"
             android:layout_gravity="center"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/dp_4"
+            android:layout_marginTop="@dimen/dp_8"
             android:src="@drawable/ic_star_red_icon"
-            app:layout_constraintStart_toEndOf="@+id/imageViewStarOneIcon"
-            app:layout_constraintTop_toBottomOf="@id/textViewMovieGenre" />
+            app:layout_constraintStart_toEndOf="@+id/imageViewDetailFragmentStarOneIcon"
+            app:layout_constraintTop_toBottomOf="@id/textViewDetailFragmentMovieGenre" />
 
         <ImageView
-            android:id="@+id/imageViewStarThreeIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/imageViewDetailFragmentStarThreeIcon"
+            android:layout_width="@dimen/dp_13"
+            android:layout_height="@dimen/dp_12"
             android:layout_gravity="center"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/dp_4"
+            android:layout_marginTop="@dimen/dp_8"
             android:src="@drawable/ic_star_red_icon"
-            app:layout_constraintStart_toEndOf="@+id/imageViewStarTwoIcon"
-            app:layout_constraintTop_toBottomOf="@id/textViewMovieGenre" />
+            app:layout_constraintStart_toEndOf="@+id/imageViewDetailFragmentStarTwoIcon"
+            app:layout_constraintTop_toBottomOf="@id/textViewDetailFragmentMovieGenre" />
 
         <ImageView
-            android:id="@+id/imageViewStarFourIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/imageViewDetailFragmentStarFourIcon"
+            android:layout_width="@dimen/dp_13"
+            android:layout_height="@dimen/dp_12"
             android:layout_gravity="center"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/dp_4"
+            android:layout_marginTop="@dimen/dp_8"
             android:src="@drawable/ic_star_red_icon"
-            app:layout_constraintStart_toEndOf="@+id/imageViewStarThreeIcon"
-            app:layout_constraintTop_toBottomOf="@id/textViewMovieGenre" />
+            app:layout_constraintStart_toEndOf="@+id/imageViewDetailFragmentStarThreeIcon"
+            app:layout_constraintTop_toBottomOf="@id/textViewDetailFragmentMovieGenre" />
 
         <ImageView
-            android:id="@+id/imageViewStarFiveIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/imageViewDetailFragmentStarFiveIcon"
+            android:layout_width="@dimen/dp_13"
+            android:layout_height="@dimen/dp_12"
             android:layout_gravity="center"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/dp_4"
+            android:layout_marginTop="@dimen/dp_8"
             android:src="@drawable/ic_star_white_icon"
-            app:layout_constraintStart_toEndOf="@+id/imageViewStarFourIcon"
-            app:layout_constraintTop_toBottomOf="@id/textViewMovieGenre" />
+            app:layout_constraintStart_toEndOf="@+id/imageViewDetailFragmentStarFourIcon"
+            app:layout_constraintTop_toBottomOf="@id/textViewDetailFragmentMovieGenre" />
 
         <TextView
-            android:id="@+id/textViewName"
+            android:id="@+id/textViewDetailFragmentReviews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_star_of_parent"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_4"
             android:gravity="center_vertical"
-            android:lineSpacingExtra="4sp"
+            android:lineSpacingExtra="@dimen/sp_4"
             android:shadowColor="@android:color/black"
             android:shadowDy="8"
             android:text="@string/reviews"
             android:textAppearance="@style/reviews"
-            android:textSize="@dimen/size_of_headers"
-            app:layout_constraintStart_toEndOf="@+id/imageViewStarFiveIcon"
-            app:layout_constraintTop_toBottomOf="@id/textViewMovieGenre" />
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintStart_toEndOf="@+id/imageViewDetailFragmentStarFiveIcon"
+            app:layout_constraintTop_toBottomOf="@id/textViewDetailFragmentMovieGenre" />
 
         <TextView
-            android:id="@+id/textViewStoryName"
+            android:id="@+id/textViewDetailFragmentStoryLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_star_of_parent"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_24"
+            android:layout_marginEnd="@dimen/dp_16"
             android:gravity="center_vertical"
-            android:lineSpacingExtra="4sp"
+            android:lineSpacingExtra="@dimen/sp_4"
             android:text="@string/story_name"
             android:textAppearance="@style/story_name"
-            android:textSize="@dimen/size_of_headers"
+            android:textSize="@dimen/sp_14"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewStarOneIcon" />
+            app:layout_constraintTop_toBottomOf="@+id/imageViewDetailFragmentStarOneIcon" />
 
         <TextView
-            android:id="@+id/textViewStory"
+            android:id="@+id/textViewDetailFragmentStory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_star_of_parent"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_marginEnd="@dimen/dp_16"
             android:gravity="center_vertical"
-            android:lineSpacingExtra="4sp"
+            android:lineSpacingExtra="@dimen/sp_4"
             android:text="@string/after_the_d"
             android:textAppearance="@style/after_the_d"
-            android:textSize="@dimen/size_of_headers"
+            android:textSize="@dimen/sp_14"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewStoryName" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewDetailFragmentStoryLine" />
 
         <TextView
-            android:id="@+id/textViewCast"
+            android:id="@+id/textViewDetailFragmentCast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/margin_star_of_parent"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_24"
+            android:layout_marginEnd="@dimen/dp_16"
             android:gravity="center_vertical"
-            android:lineSpacingExtra="8sp"
+            android:lineSpacingExtra="@dimen/sp_8"
             android:text="@string/cast"
             android:textAppearance="@style/cast"
+            android:textSize="@dimen/sp_14"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewStory" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewDetailFragmentStory" />
 
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageViewActorOne"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
             android:scaleType="fitXY"
             android:src="@drawable/image_actor_one"
             app:layout_constraintDimensionRatio="1:1"
@@ -216,22 +217,22 @@
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewCast"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDetailFragmentCast"
             app:shapeAppearanceOverlay="@style/rounded_image_view" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageViewActorTwo"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_8"
             android:scaleType="fitXY"
             android:src="@drawable/image_actor_two"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/imageViewActorThree"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/imageViewActorOne"
-            app:layout_constraintTop_toBottomOf="@+id/textViewCast"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDetailFragmentCast"
             app:shapeAppearanceOverlay="@style/rounded_image_view" />
 
 
@@ -239,31 +240,31 @@
             android:id="@+id/imageViewActorThree"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_8"
             android:scaleType="fitXY"
             android:src="@drawable/image_actor_three"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/imageViewActorFour"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/imageViewActorTwo"
-            app:layout_constraintTop_toBottomOf="@+id/textViewCast"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDetailFragmentCast"
             app:shapeAppearanceOverlay="@style/rounded_image_view" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageViewActorFour"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_16"
             android:scaleType="fitXY"
             android:src="@drawable/image_actor_four"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/imageViewActorThree"
-            app:layout_constraintTop_toBottomOf="@+id/textViewCast"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDetailFragmentCast"
             app:shapeAppearanceOverlay="@style/rounded_image_view" />
 
         <TextView
@@ -272,6 +273,7 @@
             android:layout_height="wrap_content"
             android:text="@string/robert_downey"
             android:textAppearance="@style/actors_coast"
+            android:textSize="@dimen/sp_12"
             app:layout_constraintEnd_toEndOf="@+id/imageViewActorOne"
             app:layout_constraintStart_toStartOf="@+id/imageViewActorOne"
             app:layout_constraintTop_toBottomOf="@+id/imageViewActorOne" />
@@ -282,6 +284,7 @@
             android:layout_height="wrap_content"
             android:text="@string/chris_evans"
             android:textAppearance="@style/actors_coast"
+            android:textSize="@dimen/sp_12"
             app:layout_constraintEnd_toEndOf="@id/imageViewActorTwo"
             app:layout_constraintStart_toStartOf="@id/imageViewActorTwo"
             app:layout_constraintTop_toBottomOf="@+id/imageViewActorTwo" />
@@ -292,6 +295,7 @@
             android:layout_height="wrap_content"
             android:text="@string/mark_ruffalo"
             android:textAppearance="@style/actors_coast"
+            android:textSize="@dimen/sp_12"
             app:layout_constraintEnd_toEndOf="@id/imageViewActorThree"
             app:layout_constraintStart_toStartOf="@id/imageViewActorThree"
             app:layout_constraintTop_toBottomOf="@+id/imageViewActorThree" />
@@ -303,6 +307,7 @@
             android:layout_height="wrap_content"
             android:text="@string/chris_hemsworth"
             android:textAppearance="@style/actors_coast"
+            android:textSize="@dimen/sp_12"
             app:layout_constraintEnd_toEndOf="@id/imageViewActorFour"
             app:layout_constraintStart_toStartOf="@id/imageViewActorFour"
             app:layout_constraintTop_toBottomOf="@+id/imageViewActorFour" />
