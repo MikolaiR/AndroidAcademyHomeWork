@@ -49,15 +49,9 @@
     </style>
 
     <style name="actors_coast">
-        <item name="android:textSize">12sp</item>
         <item name="android:textColor">#D8D8D8</item>
     </style>
 
-    <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">
-        <item name="android:progressDrawable">@drawable/rating_stars</item>
-        <item name="android:minHeight">8dip</item>
-        <item name="android:maxHeight">22dip</item>
-    </style>
 
 </resources>
 
