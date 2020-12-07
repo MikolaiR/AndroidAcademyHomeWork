@@ -52,9 +52,11 @@
         <item name="android:textColor">#D8D8D8</item>
     </style>
 
+    <style name="CustomHeartsRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:minHeight">@dimen/dp_12</item>
+        <item name="android:maxHeight">12dp</item>
+        <item name="android:maxWidth">47dp</item>
+    </style>
 
 </resources>
 
-<!--
-<item name="colorControlNormal">#6D6D80</item>
-<item name="colorControlActivated">#FF3365</item>-->
