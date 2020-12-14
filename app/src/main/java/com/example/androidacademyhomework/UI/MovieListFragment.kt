@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.whenStarted
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,12 +15,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.androidacademyhomework.R
 import com.example.androidacademyhomework.adapters.MovieAdapter
 import com.example.androidacademyhomework.adapters.OnRecyclerItemClicked
-import com.example.androidacademyhomework.domain.MoviesDataSource
-import com.example.androidacademyhomework.models.Movie
+import com.example.androidacademyhomework.data.Movie
+import com.example.androidacademyhomework.data.loadMovies
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 class MovieListFragment : Fragment() {
 
-    private var recyclerMovieList:RecyclerView? = null
+    private var recyclerMovieList: RecyclerView? = null
+    private val scope = lifecycleScope
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,11 +36,7 @@ class MovieListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerMovieList = view.findViewById(R.id.recyclerMovieList)
         initRecycler()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        updateData()
+        updateDate()
     }
 
     private fun initRecycler() {
@@ -47,25 +48,45 @@ class MovieListFragment : Fragment() {
         }
     }
 
-    private val clickListener = object : OnRecyclerItemClicked {
-        override fun onClick(movie:Movie) {
-            goToMovieDetailFragment(movie.id)
-        }
-    }
-
-    private fun updateData() {
-        (recyclerMovieList?.adapter as? MovieAdapter)?.apply {
-            bindActors(MoviesDataSource().getMovies())
+    private fun updateDate() {
+        scope.launch {
+            var listMovies = listOf<Movie>()
+            whenStarted {
+                listMovies = loadMovies(requireContext())
+            }
+            if (listMovies.isNotEmpty()) {
+                (recyclerMovieList?.adapter as? MovieAdapter)?.apply {
+                    bindMovies(listMovies)
+                }
+            } else {
+                Toast.makeText(requireContext(), "Error load movies", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
     override fun onDetach() {
         recyclerMovieList = null
+
         super.onDetach()
     }
 
-    private fun goToMovieDetailFragment(movieId:Int){
-        val direction = MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(movieId)
-        findNavController().navigate(direction)
+    private fun goToMovieDetailFragment(movie: Movie) {
+        findNavController().navigate(
+            MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(
+                movie
+            )
+        )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        scope.cancel()
+    }
+
+    private val clickListener = object : OnRecyclerItemClicked {
+        override fun onClick(movie: Movie) {
+            goToMovieDetailFragment(movie)
+        }
     }
 }

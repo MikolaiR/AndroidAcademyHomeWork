@@ -8,7 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.androidacademyhomework.R
-import com.example.androidacademyhomework.models.Actor
+import com.example.androidacademyhomework.context
+import com.example.androidacademyhomework.data.Actor
 
 class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
 
@@ -38,15 +39,13 @@ class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
 
         fun onBind(actor: Actor) {
             Glide.with(context)
-                .load(actor.imageActorUrl)
+                .load(actor.picture)
                 .placeholder(R.drawable.loading_animation)
                 .error(R.drawable.error_image)
                 .into(imageViewActor)
 
-            textViewNameActor.text = actor.nameActor
+            textViewNameActor.text = actor.name
         }
     }
 }
 
-private val RecyclerView.ViewHolder.context
-    get() = this.itemView.context
