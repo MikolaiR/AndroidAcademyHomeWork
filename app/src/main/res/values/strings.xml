@@ -10,5 +10,6 @@
     <string name="back">Back</string>
     <string name="movies_list">Movies list</string>
     <string name="duration_min">%d min</string>
+    <string name="error_load">Error load movies</string>
 
 </resources>

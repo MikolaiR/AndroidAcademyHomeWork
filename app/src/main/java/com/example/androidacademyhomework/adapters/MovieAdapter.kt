@@ -1,6 +1,5 @@
 package com.example.androidacademyhomework.adapters
 
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,7 +64,7 @@ class MovieAdapter(private val clickListener: OnRecyclerItemClicked) :
                 }
             }
             textViewAgeLimit.text = context.getString(R.string.age_limit, movie.minimumAge)
-            textViewMovieGenre.text = TextUtils.join(", ", movie.genres.map { it.name })
+            textViewMovieGenre.text = movie.genres.joinToString { it.name }
             ratingBarListFragment.rating = movie.ratings / 2
             textViewReviews.text = context.getString(R.string.reviews, movie.numberOfRatings)
             textViewNameMove.text = movie.title

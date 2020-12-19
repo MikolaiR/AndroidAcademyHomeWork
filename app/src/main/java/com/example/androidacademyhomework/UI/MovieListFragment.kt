@@ -59,7 +59,7 @@ class MovieListFragment : Fragment() {
                     bindMovies(listMovies)
                 }
             } else {
-                Toast.makeText(requireContext(), "Error load movies", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.error_load), Toast.LENGTH_SHORT).show()
             }
         }
     }

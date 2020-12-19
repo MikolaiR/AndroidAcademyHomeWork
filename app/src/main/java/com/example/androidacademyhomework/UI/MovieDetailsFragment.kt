@@ -1,7 +1,6 @@
 package com.example.androidacademyhomework.UI
 
 import android.os.Bundle
-import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -43,17 +42,7 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        textViewDetailFragmentAgeLimit = view.findViewById(R.id.textViewDetailFragmentAgeLimit)
-        textViewDetailFragmentNameMove = view.findViewById(R.id.textViewDetailFragmentNameMove)
-        textViewDetailFragmentMovieGenre = view.findViewById(R.id.textViewDetailFragmentMovieGenre)
-        ratingBarDetailsFragment = view.findViewById(R.id.ratingBarDetailsFragment)
-        textViewDetailFragmentReviews = view.findViewById(R.id.textViewDetailFragmentReviews)
-        textViewDetailFragmentCast = view.findViewById(R.id.textViewDetailFragmentCast)
-        textViewDetailFragmentStory = view.findViewById(R.id.textViewDetailFragmentStory)
-        imageViewDetailFragmentTitleBackground =
-            view.findViewById(R.id.imageViewDetailFragmentTitleBackground)
-        recyclerForActors = view.findViewById(R.id.recyclerForActors)
-
+        setupViews(view)
         initRecycler()
         updateDataMovieForView()
         updateData()
@@ -73,15 +62,7 @@ class MovieDetailsFragment : Fragment() {
     }
 
     override fun onDetach() {
-        textViewDetailFragmentAgeLimit = null
-        textViewDetailFragmentNameMove = null
-        textViewDetailFragmentMovieGenre = null
-        textViewDetailFragmentReviews = null
-        textViewDetailFragmentStory = null
-        textViewDetailFragmentCast = null
-        imageViewDetailFragmentTitleBackground = null
-        ratingBarDetailsFragment = null
-        recyclerForActors = null
+        clearViews()
 
         super.onDetach()
     }
@@ -99,9 +80,10 @@ class MovieDetailsFragment : Fragment() {
 
     private fun updateDataMovieForView() {
         textViewDetailFragmentAgeLimit?.text = getString(R.string.age_limit, args.movie.minimumAge)
-        textViewDetailFragmentMovieGenre?.text = TextUtils.join(", ", args.movie.genres.map { it.name })
+        textViewDetailFragmentMovieGenre?.text = args.movie.genres.joinToString { it.name }
         ratingBarDetailsFragment?.rating = args.movie.ratings / 2
-        textViewDetailFragmentReviews?.text = getString(R.string.reviews, args.movie.numberOfRatings)
+        textViewDetailFragmentReviews?.text =
+            getString(R.string.reviews, args.movie.numberOfRatings)
         textViewDetailFragmentNameMove?.text = args.movie.title
         textViewDetailFragmentStory?.text = args.movie.overview
         imageViewDetailFragmentTitleBackground?.let {
@@ -111,5 +93,30 @@ class MovieDetailsFragment : Fragment() {
                 .error(R.drawable.error_image)
                 .into(it)
         }
+    }
+
+    private fun setupViews(view: View) {
+        textViewDetailFragmentAgeLimit = view.findViewById(R.id.textViewDetailFragmentAgeLimit)
+        textViewDetailFragmentNameMove = view.findViewById(R.id.textViewDetailFragmentNameMove)
+        textViewDetailFragmentMovieGenre = view.findViewById(R.id.textViewDetailFragmentMovieGenre)
+        ratingBarDetailsFragment = view.findViewById(R.id.ratingBarDetailsFragment)
+        textViewDetailFragmentReviews = view.findViewById(R.id.textViewDetailFragmentReviews)
+        textViewDetailFragmentCast = view.findViewById(R.id.textViewDetailFragmentCast)
+        textViewDetailFragmentStory = view.findViewById(R.id.textViewDetailFragmentStory)
+        imageViewDetailFragmentTitleBackground =
+            view.findViewById(R.id.imageViewDetailFragmentTitleBackground)
+        recyclerForActors = view.findViewById(R.id.recyclerForActors)
+    }
+
+    private fun clearViews() {
+        textViewDetailFragmentAgeLimit = null
+        textViewDetailFragmentNameMove = null
+        textViewDetailFragmentMovieGenre = null
+        textViewDetailFragmentReviews = null
+        textViewDetailFragmentStory = null
+        textViewDetailFragmentCast = null
+        imageViewDetailFragmentTitleBackground = null
+        ratingBarDetailsFragment = null
+        recyclerForActors = null
     }
 }

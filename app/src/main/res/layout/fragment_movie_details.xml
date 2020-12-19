@@ -16,7 +16,7 @@
         <ImageView
             android:id="@+id/imageViewDetailFragmentTitleBackground"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="@dimen/dp_300"
             android:scaleType="centerCrop"
             android:foreground="@drawable/ic_blackout_picture"
             tools:src="@drawable/title_background_image_mask"
