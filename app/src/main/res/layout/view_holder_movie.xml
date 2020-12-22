@@ -29,7 +29,8 @@
             app:layout_constraintDimensionRatio="1:1.5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UnusedAttribute" />
 
         <ImageView
             android:id="@+id/imageViewLike"
@@ -78,10 +79,9 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginBottom="@dimen/dp_8"
             android:numStars="5"
-            android:progress="1"
+            android:stepSize="1"
             android:progressBackgroundTint="@color/white"
-            android:progressTint="@color/red"
-            android:rating="4"
+            android:progressTint="@color/pink"
             app:layout_constraintBottom_toBottomOf="@+id/imageViewTitleBackground"
             app:layout_constraintStart_toStartOf="parent" />
 

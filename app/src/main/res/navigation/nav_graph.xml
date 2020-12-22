@@ -15,11 +15,10 @@
             app:destination="@id/movieDetailsFragment">
 
             <argument
-                android:name="movieId"
-                app:argType="integer" />
+                android:name="movie"
+                app:argType="com.example.androidacademyhomework.data.Movie" />
 
         </action>
-
 
     </fragment>
     <fragment
@@ -29,14 +28,12 @@
         tools:layout="@layout/fragment_movie_details">
 
         <argument
-            android:name="movieId"
-            app:argType="integer" />
+            android:name="movie"
+            app:argType="com.example.androidacademyhomework.data.Movie" />
 
         <action
             android:id="@+id/action_movieDetailsFragment_to_movieListFragment"
-            app:destination="@id/movieListFragment"
-            app:popUpTo="@id/movieListFragment"
-            app:popUpToInclusive="true" >
+            app:popUpTo="@id/movieListFragment">
         </action>
     </fragment>
 
