@@ -1,13 +1,9 @@
-package com.example.androidacademyhomework.UI
+package com.example.androidacademyhomework.UI.movielist
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.whenStarted
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,22 +12,11 @@ import com.example.androidacademyhomework.R
 import com.example.androidacademyhomework.adapters.MovieAdapter
 import com.example.androidacademyhomework.adapters.OnRecyclerItemClicked
 import com.example.androidacademyhomework.data.Movie
-import com.example.androidacademyhomework.data.loadMovies
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
 
-class MovieListFragment : Fragment() {
+class MoviesListFragment : Fragment(R.layout.fragment_movie_list) {
 
     private var recyclerMovieList: RecyclerView? = null
-    private val scope = lifecycleScope
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_movie_list, container, false)
-    }
-
+    private val viewModel by viewModels<MoviesListFragmentViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerMovieList = view.findViewById(R.id.recyclerMovieList)
@@ -49,19 +34,11 @@ class MovieListFragment : Fragment() {
     }
 
     private fun updateDate() {
-        scope.launch {
-            var listMovies = listOf<Movie>()
-            whenStarted {
-                listMovies = loadMovies(requireContext())
+        viewModel.listMoviesLiveData.observe(this.viewLifecycleOwner, {
+            (recyclerMovieList?.adapter as? MovieAdapter)?.apply {
+                bindMovies(it)
             }
-            if (listMovies.isNotEmpty()) {
-                (recyclerMovieList?.adapter as? MovieAdapter)?.apply {
-                    bindMovies(listMovies)
-                }
-            } else {
-                Toast.makeText(requireContext(), getString(R.string.error_load), Toast.LENGTH_SHORT).show()
-            }
-        }
+        })
     }
 
     override fun onDetach() {
@@ -72,16 +49,10 @@ class MovieListFragment : Fragment() {
 
     private fun goToMovieDetailFragment(movie: Movie) {
         findNavController().navigate(
-            MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(
+            MoviesListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(
                 movie
             )
         )
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        scope.cancel()
     }
 
     private val clickListener = object : OnRecyclerItemClicked {
