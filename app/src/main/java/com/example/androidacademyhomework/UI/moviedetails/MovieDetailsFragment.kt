@@ -1,4 +1,4 @@
-package com.example.androidacademyhomework.UI
+package com.example.androidacademyhomework.UI.moviedetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +9,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -16,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.androidacademyhomework.R
-import com.example.androidacademyhomework.adapters.ActorsAdapter
+import com.example.androidacademyhomework.data.Movie
 
 class MovieDetailsFragment : Fragment() {
 
@@ -31,6 +33,11 @@ class MovieDetailsFragment : Fragment() {
     private var recyclerForActors: RecyclerView? = null
 
     private val args: MovieDetailsFragmentArgs by navArgs()
+    private val viewModel: MovieDetailsFragmentViewModel by viewModels {
+        MovieDetailsFragmentViewModelFactory(
+            args.movie
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,11 +48,11 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupViews(view)
         initRecycler()
-        updateDataMovieForView()
-        updateData()
+        viewModel.movieLiveData.observe(this.viewLifecycleOwner, {
+            updateData(it)
+        })
 
         view.findViewById<Button>(R.id.buttonViewBack).setOnClickListener {
             findNavController().navigate(R.id.action_movieDetailsFragment_to_movieListFragment)
@@ -67,31 +74,28 @@ class MovieDetailsFragment : Fragment() {
         super.onDetach()
     }
 
-    private fun updateData() {
-        if (args.movie.actors.isEmpty()) {
-            textViewDetailFragmentCast?.visibility = View.GONE
-        } else {
-            textViewDetailFragmentCast?.visibility = View.VISIBLE
-            (recyclerForActors?.adapter as? ActorsAdapter)?.apply {
-                bindActors(args.movie.actors)
-            }
-        }
-    }
-
-    private fun updateDataMovieForView() {
-        textViewDetailFragmentAgeLimit?.text = getString(R.string.age_limit, args.movie.minimumAge)
-        textViewDetailFragmentMovieGenre?.text = args.movie.genres.joinToString { it.name }
-        ratingBarDetailsFragment?.rating = args.movie.ratings / 2
+    private fun updateData(movie: Movie) {
+        textViewDetailFragmentAgeLimit?.text = getString(R.string.age_limit, movie.minimumAge)
+        textViewDetailFragmentMovieGenre?.text = movie.genres.joinToString { it.name }
+        ratingBarDetailsFragment?.rating = movie.ratings / 2
         textViewDetailFragmentReviews?.text =
-            getString(R.string.reviews, args.movie.numberOfRatings)
-        textViewDetailFragmentNameMove?.text = args.movie.title
-        textViewDetailFragmentStory?.text = args.movie.overview
+            getString(R.string.reviews, movie.numberOfRatings)
+        textViewDetailFragmentNameMove?.text = movie.title
+        textViewDetailFragmentStory?.text = movie.overview
         imageViewDetailFragmentTitleBackground?.let {
             Glide.with(requireContext())
-                .load(args.movie.backdrop)
+                .load(movie.backdrop)
                 .placeholder(R.drawable.loading_animation)
                 .error(R.drawable.error_image)
                 .into(it)
+        }
+        if (movie.actors.isEmpty()) {
+            textViewDetailFragmentCast?.isVisible = false
+        } else {
+            textViewDetailFragmentCast?.isVisible = true
+            (recyclerForActors?.adapter as? ActorsAdapter)?.apply {
+                bindActors(movie.actors)
+            }
         }
     }
 

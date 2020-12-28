@@ -1,4 +1,4 @@
-package com.example.androidacademyhomework.adapters
+package com.example.androidacademyhomework.UI.moviedetails
 
 import android.view.LayoutInflater
 import android.view.View
