@@ -33,11 +33,6 @@ class MovieDetailsFragment : Fragment() {
     private var recyclerForActors: RecyclerView? = null
 
     private val args: MovieDetailsFragmentArgs by navArgs()
-    private val viewModel: MovieDetailsFragmentViewModel by viewModels {
-        MovieDetailsFragmentViewModelFactory(
-            args.movie
-        )
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,11 +43,10 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupViews(view)
         initRecycler()
-        viewModel.movieLiveData.observe(this.viewLifecycleOwner, {
-            updateData(it)
-        })
+        updateData(args.movie)
 
         view.findViewById<Button>(R.id.buttonViewBack).setOnClickListener {
             findNavController().navigate(R.id.action_movieDetailsFragment_to_movieListFragment)
