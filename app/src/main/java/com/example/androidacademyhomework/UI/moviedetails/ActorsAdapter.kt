@@ -7,15 +7,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.androidacademyhomework.BuildConfig
 import com.example.androidacademyhomework.R
 import com.example.androidacademyhomework.context
-import com.example.androidacademyhomework.data.Actor
+import com.example.androidacademyhomework.data.model.MovieActors
 
 class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
 
-    private var actors = listOf<Actor>()
+    private var actors = listOf<MovieActors>()
 
-    fun bindActors(newActors: List<Actor>) {
+    fun bindActors(newActors: List<MovieActors>) {
         actors = newActors
         notifyDataSetChanged()
     }
@@ -37,9 +38,10 @@ class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
         private val imageViewActor = itemView.findViewById<ImageView>(R.id.imageViewActor)
         private val textViewNameActor = itemView.findViewById<TextView>(R.id.textViewNameActor)
 
-        fun onBind(actor: Actor) {
+        fun onBind(actor: MovieActors) {
+            val imagePath = "${BuildConfig.BASE_URL_FROM_IMAGE}${actor.profilePath}"
             Glide.with(context)
-                .load(actor.picture)
+                .load(imagePath)
                 .placeholder(R.drawable.loading_animation)
                 .error(R.drawable.error_image)
                 .into(imageViewActor)

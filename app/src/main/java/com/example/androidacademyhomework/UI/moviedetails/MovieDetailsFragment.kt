@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.androidacademyhomework.R
-import com.example.androidacademyhomework.data.Movie
+import com.example.androidacademyhomework.data.model.Movie
 
 class MovieDetailsFragment : Fragment() {
 
@@ -33,6 +33,7 @@ class MovieDetailsFragment : Fragment() {
     private var recyclerForActors: RecyclerView? = null
 
     private val args: MovieDetailsFragmentArgs by navArgs()
+    private val viewModel by viewModels<MovieDetailsFragmentViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +47,11 @@ class MovieDetailsFragment : Fragment() {
 
         setupViews(view)
         initRecycler()
-        updateData(args.movie)
+        viewModel.updateDate(args.movieId)
+        viewModel.movieLiveData.observe(this.viewLifecycleOwner,{
+            updateData(it)
+        })
+
 
         view.findViewById<Button>(R.id.buttonViewBack).setOnClickListener {
             findNavController().navigate(R.id.action_movieDetailsFragment_to_movieListFragment)
@@ -77,8 +82,9 @@ class MovieDetailsFragment : Fragment() {
         textViewDetailFragmentNameMove?.text = movie.title
         textViewDetailFragmentStory?.text = movie.overview
         imageViewDetailFragmentTitleBackground?.let {
+            val imagePath = "https://image.tmdb.org/t/p/w500${movie.backdrop}"
             Glide.with(requireContext())
-                .load(movie.backdrop)
+                .load(imagePath)
                 .placeholder(R.drawable.loading_animation)
                 .error(R.drawable.error_image)
                 .into(it)
