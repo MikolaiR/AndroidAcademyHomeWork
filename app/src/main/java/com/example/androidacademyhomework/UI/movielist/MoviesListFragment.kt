@@ -11,17 +11,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.androidacademyhomework.R
 import com.example.androidacademyhomework.adapters.MovieAdapter
 import com.example.androidacademyhomework.adapters.OnRecyclerItemClicked
-import com.example.androidacademyhomework.data.Movie
+import com.example.androidacademyhomework.data.model.Movie
 
 class MoviesListFragment : Fragment(R.layout.fragment_movie_list) {
 
     private var recyclerMovieList: RecyclerView? = null
     private val viewModel by viewModels<MoviesListFragmentViewModel>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerMovieList = view.findViewById(R.id.recyclerMovieList)
         initRecycler()
-        updateDate()
+        /*GlobalScope.launch(Dispatchers.IO) {
+            RetrofitInstance().getService().getActors(743904,BuildConfig.MOVIE_DATABASE_API_KEY)
+        }*/
+        viewModel.getMovies()
+        viewModel.moviesLiveData.observe(this.viewLifecycleOwner,{
+            updateDate(it)
+        })
     }
 
     private fun initRecycler() {
@@ -33,12 +40,10 @@ class MoviesListFragment : Fragment(R.layout.fragment_movie_list) {
         }
     }
 
-    private fun updateDate() {
-        viewModel.listMoviesLiveData.observe(this.viewLifecycleOwner, {
+    private fun updateDate(movies: List<Movie>) {
             (recyclerMovieList?.adapter as? MovieAdapter)?.apply {
-                bindMovies(it)
+                bindMovies(movies)
             }
-        })
     }
 
     override fun onDetach() {
@@ -47,17 +52,17 @@ class MoviesListFragment : Fragment(R.layout.fragment_movie_list) {
         super.onDetach()
     }
 
-    private fun goToMovieDetailFragment(movie: Movie) {
+    private fun goToMovieDetailFragment(movieId: Int) {
         findNavController().navigate(
             MoviesListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(
-                movie
+                movieId
             )
         )
     }
 
     private val clickListener = object : OnRecyclerItemClicked {
         override fun onClick(movie: Movie) {
-            goToMovieDetailFragment(movie)
+            goToMovieDetailFragment(movie.id)
         }
     }
 }

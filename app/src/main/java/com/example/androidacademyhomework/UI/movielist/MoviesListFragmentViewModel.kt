@@ -1,15 +1,20 @@
 package com.example.androidacademyhomework.UI.movielist
 
-import android.app.Application
 import androidx.lifecycle.*
-import com.example.androidacademyhomework.data.Movie
+import com.example.androidacademyhomework.data.model.Movie
 import com.example.androidacademyhomework.repository.MovieRepository
+import kotlinx.coroutines.launch
 
-class MoviesListFragmentViewModel(application: Application) : AndroidViewModel(application) {
+class MoviesListFragmentViewModel : ViewModel() {
 
-    private val repository = MovieRepository(application)
-    val listMoviesLiveData: LiveData<List<Movie>> = liveData {
-        emit(repository.loadMovies())
+    private val repository = MovieRepository()
+    private val _moviesLiveData = MutableLiveData<List<Movie>>()
+    val moviesLiveData: LiveData<List<Movie>>
+        get() = _moviesLiveData
+
+    fun getMovies(){
+        viewModelScope.launch {
+               _moviesLiveData.value = repository.loadMovies()
+        }
     }
-
 }

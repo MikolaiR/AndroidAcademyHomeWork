@@ -8,9 +8,10 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.androidacademyhomework.BuildConfig
 import com.example.androidacademyhomework.R
 import com.example.androidacademyhomework.context
-import com.example.androidacademyhomework.data.Movie
+import com.example.androidacademyhomework.data.model.Movie
 
 class MovieAdapter(private val clickListener: OnRecyclerItemClicked) :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
@@ -52,8 +53,9 @@ class MovieAdapter(private val clickListener: OnRecyclerItemClicked) :
             itemView.findViewById<TextView>(R.id.textViewFilmDuration)
 
         fun onBind(movie: Movie) {
+            val imagePath = "${BuildConfig.BASE_URL_FROM_IMAGE}${movie.poster}"
             Glide.with(context)
-                .load(movie.poster)
+                .load(imagePath)
                 .placeholder(R.drawable.loading_animation)
                 .error(R.drawable.error_image)
                 .into(imageViewTitleBackground)
