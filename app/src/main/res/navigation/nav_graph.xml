@@ -15,9 +15,8 @@
             app:destination="@id/movieDetailsFragment">
 
             <argument
-                android:name="movie"
-                app:argType="com.example.androidacademyhomework.data.Movie" />
-
+                android:name="movieId"
+                app:argType="integer" />
         </action>
 
     </fragment>
@@ -28,13 +27,12 @@
         tools:layout="@layout/fragment_movie_details">
 
         <argument
-            android:name="movie"
-            app:argType="com.example.androidacademyhomework.data.Movie" />
+            android:name="movieId"
+            app:argType="integer" />
 
         <action
             android:id="@+id/action_movieDetailsFragment_to_movieListFragment"
-            app:popUpTo="@id/movieListFragment">
-        </action>
+            app:popUpTo="@id/movieListFragment" />
     </fragment>
 
 </navigation>
