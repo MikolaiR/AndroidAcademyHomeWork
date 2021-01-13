@@ -10,14 +10,16 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.androidacademyhomework.BuildConfig
 import com.example.androidacademyhomework.R
+import com.example.androidacademyhomework.UI.MovieViewModelFactory
 import com.example.androidacademyhomework.data.model.Movie
 
 class MovieDetailsFragment : Fragment() {
@@ -33,7 +35,7 @@ class MovieDetailsFragment : Fragment() {
     private var recyclerForActors: RecyclerView? = null
 
     private val args: MovieDetailsFragmentArgs by navArgs()
-    private val viewModel by viewModels<MovieDetailsFragmentViewModel>()
+    private lateinit var viewModel: MovieDetailsFragmentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,12 +48,14 @@ class MovieDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupViews(view)
-        initRecycler()
-        viewModel.updateDate(args.movieId)
-        viewModel.movieLiveData.observe(this.viewLifecycleOwner,{
+
+        viewModel =
+            ViewModelProvider(this, MovieViewModelFactory.Injection.provideViewModelFactory())
+                .get(MovieDetailsFragmentViewModel::class.java)
+        viewModel.loadDetailsMovie(args.movieId)
+        viewModel.movieDetailsLiveData.observe(viewLifecycleOwner, {
             updateData(it)
         })
-
 
         view.findViewById<Button>(R.id.buttonViewBack).setOnClickListener {
             findNavController().navigate(R.id.action_movieDetailsFragment_to_movieListFragment)
@@ -76,25 +80,30 @@ class MovieDetailsFragment : Fragment() {
     private fun updateData(movie: Movie) {
         textViewDetailFragmentAgeLimit?.text = getString(R.string.age_limit, movie.minimumAge)
         textViewDetailFragmentMovieGenre?.text = movie.genres.joinToString { it.name }
-        ratingBarDetailsFragment?.rating = movie.ratings / 2
+        ratingBarDetailsFragment?.rating = if (movie.ratings != null) {
+            movie.ratings.div(2)
+        } else 0F
         textViewDetailFragmentReviews?.text =
             getString(R.string.reviews, movie.numberOfRatings)
         textViewDetailFragmentNameMove?.text = movie.title
         textViewDetailFragmentStory?.text = movie.overview
         imageViewDetailFragmentTitleBackground?.let {
-            val imagePath = "https://image.tmdb.org/t/p/w500${movie.backdrop}"
+            val imagePath = "${BuildConfig.BASE_URL_FROM_IMAGE}${movie.backdrop}"
             Glide.with(requireContext())
                 .load(imagePath)
                 .placeholder(R.drawable.loading_animation)
                 .error(R.drawable.error_image)
                 .into(it)
         }
-        if (movie.actors.isEmpty()) {
-            textViewDetailFragmentCast?.isVisible = false
-        } else {
-            textViewDetailFragmentCast?.isVisible = true
-            (recyclerForActors?.adapter as? ActorsAdapter)?.apply {
-                bindActors(movie.actors)
+        if (movie.actors != null) {
+            if (movie.actors.isNotEmpty()) {
+                initRecycler()
+                textViewDetailFragmentCast?.isVisible = true
+                (recyclerForActors?.adapter as? ActorsAdapter)?.apply {
+                    bindActors(movie.actors)
+                }
+            } else {
+                textViewDetailFragmentCast?.isVisible = false
             }
         }
     }

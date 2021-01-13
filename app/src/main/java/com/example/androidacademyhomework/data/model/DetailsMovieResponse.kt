@@ -10,9 +10,9 @@ data class DetailsMovie(
 	val title: String,
 	@field:Json(name="backdrop_path")
 	val backdropPath: String,
-	val revenue: Int,
+	val revenue: Long,
 	@field:Json(name="genres")
-	val genres: List<GenresItem>,
+	val genres: List<Genres>,
 	val popularity: Double,
 	val productionCountries: List<ProductionCountriesItem>,
 	@field:Json(name="id")

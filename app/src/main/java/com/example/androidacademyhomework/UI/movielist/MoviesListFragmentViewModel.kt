@@ -1,20 +1,25 @@
 package com.example.androidacademyhomework.UI.movielist
 
 import androidx.lifecycle.*
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.paging.liveData
+import androidx.paging.map
+import com.example.androidacademyhomework.createMovie
 import com.example.androidacademyhomework.data.model.Movie
 import com.example.androidacademyhomework.repository.MovieRepository
-import kotlinx.coroutines.launch
 
-class MoviesListFragmentViewModel : ViewModel() {
+class MoviesListFragmentViewModel(private val repository: MovieRepository) : ViewModel() {
 
-    private val repository = MovieRepository()
-    private val _moviesLiveData = MutableLiveData<List<Movie>>()
-    val moviesLiveData: LiveData<List<Movie>>
-        get() = _moviesLiveData
-
-    fun getMovies(){
-        viewModelScope.launch {
-               _moviesLiveData.value = repository.loadMovies()
+    fun loadMovies(): LiveData<PagingData<Movie>> {
+        val movieResult = repository.loadMoviesListWithPage().liveData.cachedIn(viewModelScope)
+        return movieResult.map { pagingData ->
+            pagingData.map {
+                createMovie(
+                    repository.loadMovieDetails(it.id), null
+                )
+            }
         }
     }
 }
+

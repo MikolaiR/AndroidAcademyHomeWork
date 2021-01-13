@@ -2,7 +2,6 @@ package com.example.androidacademyhomework.data.network
 
 import com.example.androidacademyhomework.data.model.ActorsResponse
 import com.example.androidacademyhomework.data.model.DetailsMovie
-import com.example.androidacademyhomework.data.model.GenresResponse
 import com.example.androidacademyhomework.data.model.MoviesApiResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -11,10 +10,10 @@ import retrofit2.http.Query
 interface MovieApi {
 
     @GET("movie/popular")
-    suspend fun getPopularMovies(@Query("api_key") apiKey: String): MoviesApiResponse
-
-    @GET("genre/movie/list")
-    suspend fun getGenreMovie(@Query("api_key") apiKey: String): GenresResponse
+    suspend fun getPopularMoviesWithPaging(
+        @Query("api_key") apiKey: String,
+        @Query("page") page: Long
+    ): MoviesApiResponse
 
     @GET("movie/{movie_id}/credits")
     suspend fun getActors(

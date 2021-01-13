@@ -1,20 +1,22 @@
 package com.example.androidacademyhomework.UI.moviedetails
 
 import androidx.lifecycle.*
+import com.example.androidacademyhomework.createMovie
 import com.example.androidacademyhomework.data.model.Movie
 import com.example.androidacademyhomework.repository.MovieRepository
 import kotlinx.coroutines.launch
 
-class MovieDetailsFragmentViewModel: ViewModel() {
+class MovieDetailsFragmentViewModel(private val repository: MovieRepository): ViewModel() {
 
-    private val repository = MovieRepository()
-    private val _movieLiveData = MutableLiveData<Movie>()
-    val movieLiveData: LiveData<Movie>
-        get() = _movieLiveData
+    private val _movieDetailsLiveData = MutableLiveData<Movie>()
+    val movieDetailsLiveData: LiveData<Movie>
+    get() = _movieDetailsLiveData
 
-     fun updateDate(movieId:Int){
-         viewModelScope.launch {
-            _movieLiveData.value = repository.loadMovieById(movieId)
+    fun loadDetailsMovie(movieId:Int) {
+        viewModelScope.launch {
+            val movieDetails = repository.loadMovieDetails(movieId)
+            val actorsResponse = repository.loadActors(movieId)
+            _movieDetailsLiveData.value = createMovie(movieDetails,actorsResponse)
         }
     }
 }
