@@ -1,5 +1,6 @@
 package com.example.androidacademyhomework.repository
 
+import android.util.Log
 import androidx.paging.PagingSource
 import com.example.androidacademyhomework.BuildConfig
 import com.example.androidacademyhomework.data.model.MovieResult
@@ -7,15 +8,18 @@ import com.example.androidacademyhomework.data.network.MovieApi
 import retrofit2.HttpException
 import java.io.IOException
 
-internal const val THE_MOVIE_DB_STARTING_PAGE_INDEX: Long = 1
-
-class MoviesPagingSource(private val movieApi: MovieApi) :
+class SearchMoviesPagingSource(
+    private val movieApi: MovieApi,
+    private val query: String
+) :
     PagingSource<Long, MovieResult>() {
 
     override suspend fun load(params: LoadParams<Long>): LoadResult<Long, MovieResult> {
         val position = params.key ?: THE_MOVIE_DB_STARTING_PAGE_INDEX
+        Log.d("PagingSource", "load: $query ")
         return try {
-            val moviesList = movieApi.getPopularMoviesWithPaging(
+            val moviesList = movieApi.getSearchMoviesWithPaging(
+                query = query,
                 apiKey = BuildConfig.MOVIE_DATABASE_API_KEY,
                 page = position
             ).results
