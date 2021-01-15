@@ -2,15 +2,14 @@ package com.example.androidacademyhomework.UI.moviedetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -21,8 +20,11 @@ import com.example.androidacademyhomework.BuildConfig
 import com.example.androidacademyhomework.R
 import com.example.androidacademyhomework.UI.MovieViewModelFactory
 import com.example.androidacademyhomework.data.model.Movie
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-class MovieDetailsFragment : Fragment() {
+class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
 
     private var textViewDetailFragmentAgeLimit: TextView? = null
     private var textViewDetailFragmentNameMove: TextView? = null
@@ -36,13 +38,7 @@ class MovieDetailsFragment : Fragment() {
 
     private val args: MovieDetailsFragmentArgs by navArgs()
     private lateinit var viewModel: MovieDetailsFragmentViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_movie_details, container, false)
-    }
+    private var searchJob: Job? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,10 +48,8 @@ class MovieDetailsFragment : Fragment() {
         viewModel =
             ViewModelProvider(this, MovieViewModelFactory.Injection.provideViewModelFactory())
                 .get(MovieDetailsFragmentViewModel::class.java)
-        viewModel.loadDetailsMovie(args.movieId)
-        viewModel.movieDetailsLiveData.observe(viewLifecycleOwner, {
-            updateData(it)
-        })
+
+        loadAndUpdateMovie()
 
         view.findViewById<Button>(R.id.buttonViewBack).setOnClickListener {
             findNavController().navigate(R.id.action_movieDetailsFragment_to_movieListFragment)
@@ -71,7 +65,16 @@ class MovieDetailsFragment : Fragment() {
         }
     }
 
+    private fun loadAndUpdateMovie() {
+        searchJob = lifecycleScope.launch {
+            viewModel.loadDetailsMovie(args.movieId).collect {
+                updateData(it)
+            }
+        }
+    }
+
     override fun onDetach() {
+        searchJob?.cancel()
         clearViews()
 
         super.onDetach()
