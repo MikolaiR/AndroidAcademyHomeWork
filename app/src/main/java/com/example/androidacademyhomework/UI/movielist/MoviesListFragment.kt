@@ -19,6 +19,7 @@ import com.example.androidacademyhomework.adapters.OnRecyclerItemClicked
 import com.example.androidacademyhomework.data.model.Movie
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class MoviesListFragment : Fragment(R.layout.fragment_movie_list) {
@@ -44,8 +45,12 @@ class MoviesListFragment : Fragment(R.layout.fragment_movie_list) {
                 .get(MoviesListFragmentViewModel::class.java)
         initRecycler()
         initEditText()
+        if (!viewModel.isSearch.value){
+            loadPopularMovies()
+        }
         view.findViewById<Button>(R.id.buttonViewMenu).setOnClickListener {
             loadPopularMovies()
+            searchEditText?.text?.clear()
         }
     }
 

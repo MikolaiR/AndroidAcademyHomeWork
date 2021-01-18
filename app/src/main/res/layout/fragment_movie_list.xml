@@ -41,7 +41,7 @@
         android:background="@android:color/transparent"
         android:drawableLeft="@drawable/ic_combined_shape"
         android:gravity="center"
-        android:text="@string/movies_popular"
+        android:text="@string/get_popular_movies"
         android:textAppearance="@style/button_back"
         android:textSize="@dimen/sp_12"
         app:layout_constraintStart_toStartOf="parent"
