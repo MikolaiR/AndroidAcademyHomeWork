@@ -3,7 +3,6 @@ package com.example.androidacademyhomework.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.androidacademyhomework.BuildConfig
 import com.example.androidacademyhomework.data.model.*
 import com.example.androidacademyhomework.data.network.MovieApi
 import kotlinx.coroutines.flow.Flow
@@ -31,10 +30,10 @@ class MovieRepository(private val movieApi: MovieApi) {
         ).flow
 
     suspend fun loadMovieDetails(movieId:Int): DetailsMovie{
-        return movieApi.getMovie(movieId = movieId, apiKey = BuildConfig.MOVIE_DATABASE_API_KEY)
+        return movieApi.getMovie(movieId = movieId)
     }
 
     suspend fun loadActors(movieId:Int): ActorsResponse{
-        return movieApi.getActors(movie_id = movieId, apiKey = BuildConfig.MOVIE_DATABASE_API_KEY)
+        return movieApi.getActors(movie_id = movieId)
     }
 }

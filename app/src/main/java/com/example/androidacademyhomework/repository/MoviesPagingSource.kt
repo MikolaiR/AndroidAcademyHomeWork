@@ -1,7 +1,6 @@
 package com.example.androidacademyhomework.repository
 
 import androidx.paging.PagingSource
-import com.example.androidacademyhomework.BuildConfig
 import com.example.androidacademyhomework.data.model.MovieResult
 import com.example.androidacademyhomework.data.network.MovieApi
 import retrofit2.HttpException
@@ -16,7 +15,6 @@ class MoviesPagingSource(private val movieApi: MovieApi) :
         val position = params.key ?: THE_MOVIE_DB_STARTING_PAGE_INDEX
         return try {
             val moviesList = movieApi.getPopularMoviesWithPaging(
-                apiKey = BuildConfig.MOVIE_DATABASE_API_KEY,
                 page = position
             ).results
             val nextKey = if (moviesList.isEmpty()) {
