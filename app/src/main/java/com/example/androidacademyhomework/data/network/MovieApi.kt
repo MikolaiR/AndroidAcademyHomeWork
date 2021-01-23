@@ -17,7 +17,7 @@ interface MovieApi {
     suspend fun getSearchMoviesWithPaging(
         @Query("page") page: Long,
         @Query("query") query: String
-    ): MoviesSearchResponse
+    ): MoviesApiResponse
 
     @GET("movie/{movie_id}/credits")
     suspend fun getActors(

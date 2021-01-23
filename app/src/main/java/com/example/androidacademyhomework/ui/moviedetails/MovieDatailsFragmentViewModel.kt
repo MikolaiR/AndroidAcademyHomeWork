@@ -1,4 +1,4 @@
-package com.example.androidacademyhomework.UI.moviedetails
+package com.example.androidacademyhomework.ui.moviedetails
 
 import androidx.lifecycle.*
 import com.example.androidacademyhomework.createMovie

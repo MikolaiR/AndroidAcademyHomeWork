@@ -6,7 +6,9 @@ data class MoviesApiResponse(
 	@Json(name = "page")
 	val page: Int,
 	@Json(name = "results")
-	val results: List<MovieResult>
+	val results: List<MovieResult>,
+	@field:Json(name = "total_pages")
+	val totalPages: Int
 )
 
 data class MovieResult(

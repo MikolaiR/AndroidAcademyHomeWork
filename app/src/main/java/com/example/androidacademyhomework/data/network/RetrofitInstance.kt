@@ -1,7 +1,6 @@
 package com.example.androidacademyhomework.data.network
 
 import com.example.androidacademyhomework.BuildConfig
-import com.example.androidacademyhomework.repository.TokenInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

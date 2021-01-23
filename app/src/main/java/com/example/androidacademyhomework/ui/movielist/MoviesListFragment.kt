@@ -1,6 +1,7 @@
-package com.example.androidacademyhomework.UI.movielist
+package com.example.androidacademyhomework.ui.movielist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -13,13 +14,12 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidacademyhomework.R
-import com.example.androidacademyhomework.UI.MovieViewModelFactory
+import com.example.androidacademyhomework.ui.MovieViewModelFactory
 import com.example.androidacademyhomework.adapters.MovieAdapter
 import com.example.androidacademyhomework.adapters.OnRecyclerItemClicked
 import com.example.androidacademyhomework.data.model.Movie
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class MoviesListFragment : Fragment(R.layout.fragment_movie_list) {
@@ -45,7 +45,7 @@ class MoviesListFragment : Fragment(R.layout.fragment_movie_list) {
                 .get(MoviesListFragmentViewModel::class.java)
         initRecycler()
         initEditText()
-        if (!viewModel.isSearch.value){
+        if (viewModel.isFirstStart.value){
             loadPopularMovies()
         }
         view.findViewById<Button>(R.id.buttonViewMenu).setOnClickListener {

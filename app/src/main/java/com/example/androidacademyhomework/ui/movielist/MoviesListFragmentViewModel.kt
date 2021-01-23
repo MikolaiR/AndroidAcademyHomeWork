@@ -1,4 +1,4 @@
-package com.example.androidacademyhomework.UI.movielist
+package com.example.androidacademyhomework.ui.movielist
 
 import androidx.lifecycle.*
 import androidx.paging.*
@@ -11,25 +11,27 @@ class MoviesListFragmentViewModel(private val repository: MovieRepository) : Vie
 
     private var currentQueryValue: String? = null
     private var currentSearchResult: Flow<PagingData<Movie>>? = null
-    private var currentResult: Flow<PagingData<Movie>>? = null
+    private var currentPopularResult: Flow<PagingData<Movie>>? = null
 
-   private val _isSearch = MutableStateFlow<Boolean>(false)
-     val isSearch: StateFlow<Boolean>
-     get() = _isSearch
+   private val _isFirstStart = MutableStateFlow<Boolean>(true)
+     val isFirstStart: StateFlow<Boolean>
+     get() = _isFirstStart
 
     fun popularMovies(): Flow<PagingData<Movie>> {
-        _isSearch.value = true
-        val lastResult = currentResult
+        _isFirstStart.value = false
+        val lastResult = currentPopularResult
         if (lastResult != null) {
             return lastResult
         }
-        return repository.loadPopularMoviesWithPage()
+        val newResult: Flow<PagingData<Movie>> =  repository.loadPopularMoviesWithPage()
                 .map { pagingData -> pagingData.map { createMovie(repository.loadMovieDetails(it.id),null) }}
                 .cachedIn(viewModelScope)
+        currentPopularResult = newResult
+        return newResult
     }
 
     fun searchMovies(queryString: String): Flow<PagingData<Movie>> {
-        _isSearch.value = true
+        _isFirstStart.value = false
         val lastResult = currentSearchResult
         if (queryString == currentQueryValue && lastResult != null) {
             return lastResult
@@ -43,5 +45,3 @@ class MoviesListFragmentViewModel(private val repository: MovieRepository) : Vie
         return newResult
     }
 }
-
-

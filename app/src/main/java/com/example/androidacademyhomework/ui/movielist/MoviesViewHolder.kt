@@ -1,4 +1,4 @@
-package com.example.androidacademyhomework.UI.movielist
+package com.example.androidacademyhomework.ui.movielist
 
 import android.view.View
 import android.widget.ImageView
@@ -6,7 +6,6 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.androidacademyhomework.BuildConfig
 import com.example.androidacademyhomework.R
 import com.example.androidacademyhomework.context
 import com.example.androidacademyhomework.data.model.Movie

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.example.androidacademyhomework.R
-import com.example.androidacademyhomework.UI.movielist.MoviesViewHolder
+import com.example.androidacademyhomework.ui.movielist.MoviesViewHolder
 import com.example.androidacademyhomework.data.model.Movie
 
 class MovieAdapter(private val clickListener: OnRecyclerItemClicked) :

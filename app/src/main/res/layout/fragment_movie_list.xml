@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".UI.movielist.MoviesListFragment">
+    tools:context=".ui.movielist.MoviesListFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutSearch"

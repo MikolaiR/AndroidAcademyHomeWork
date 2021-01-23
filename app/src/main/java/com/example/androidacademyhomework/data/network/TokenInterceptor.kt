@@ -1,4 +1,4 @@
-package com.example.androidacademyhomework.repository
+package com.example.androidacademyhomework.data.network
 
 import com.example.androidacademyhomework.BuildConfig
 import okhttp3.Interceptor

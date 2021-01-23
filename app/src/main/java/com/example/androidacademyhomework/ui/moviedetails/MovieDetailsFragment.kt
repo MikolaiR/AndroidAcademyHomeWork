@@ -1,4 +1,4 @@
-package com.example.androidacademyhomework.UI.moviedetails
+package com.example.androidacademyhomework.ui.moviedetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,9 +16,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.androidacademyhomework.BuildConfig
 import com.example.androidacademyhomework.R
-import com.example.androidacademyhomework.UI.MovieViewModelFactory
+import com.example.androidacademyhomework.ui.MovieViewModelFactory
 import com.example.androidacademyhomework.data.model.Movie
 import com.example.androidacademyhomework.fullUrl
 import kotlinx.coroutines.Job
@@ -39,7 +38,6 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
 
     private val args: MovieDetailsFragmentArgs by navArgs()
     private lateinit var viewModel: MovieDetailsFragmentViewModel
-    private var searchJob: Job? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,7 +65,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
     }
 
     private fun loadAndUpdateMovie() {
-        searchJob = lifecycleScope.launch {
+        lifecycleScope.launch {
             viewModel.loadDetailsMovie(args.movieId).collect {
                 updateData(it)
             }
@@ -75,7 +73,6 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
     }
 
     override fun onDetach() {
-        searchJob?.cancel()
         clearViews()
 
         super.onDetach()

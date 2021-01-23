@@ -1,9 +1,9 @@
-package com.example.androidacademyhomework.UI
+package com.example.androidacademyhomework.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.androidacademyhomework.UI.moviedetails.MovieDetailsFragmentViewModel
-import com.example.androidacademyhomework.UI.movielist.MoviesListFragmentViewModel
+import com.example.androidacademyhomework.ui.moviedetails.MovieDetailsFragmentViewModel
+import com.example.androidacademyhomework.ui.movielist.MoviesListFragmentViewModel
 import com.example.androidacademyhomework.data.network.RetrofitInstance
 import com.example.androidacademyhomework.repository.MovieRepository
 

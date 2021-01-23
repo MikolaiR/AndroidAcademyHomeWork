@@ -1,5 +1,6 @@
 package com.example.androidacademyhomework.repository
 
+import android.util.Log
 import androidx.paging.PagingSource
 import com.example.androidacademyhomework.data.model.MovieResult
 import com.example.androidacademyhomework.data.network.MovieApi
@@ -14,10 +15,11 @@ class MoviesPagingSource(private val movieApi: MovieApi) :
     override suspend fun load(params: LoadParams<Long>): LoadResult<Long, MovieResult> {
         val position = params.key ?: THE_MOVIE_DB_STARTING_PAGE_INDEX
         return try {
-            val moviesList = movieApi.getPopularMoviesWithPaging(
+            val movieResponse = movieApi.getPopularMoviesWithPaging(
                 page = position
-            ).results
-            val nextKey = if (moviesList.isEmpty()) {
+            )
+            val moviesList = movieResponse.results
+            val nextKey = if (movieResponse.page >= movieResponse.totalPages) {
                 null
             } else {
                 position + 1
