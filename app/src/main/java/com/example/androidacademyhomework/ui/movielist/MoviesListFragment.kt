@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
@@ -45,7 +46,7 @@ class MoviesListFragment : Fragment(R.layout.fragment_movie_list) {
                 .get(MoviesListFragmentViewModel::class.java)
         initRecycler()
         initEditText()
-        if (viewModel.isFirstStart.value){
+        if (viewModel.isFirstStart.value) {
             loadPopularMovies()
         }
         view.findViewById<Button>(R.id.buttonViewMenu).setOnClickListener {
@@ -55,19 +56,19 @@ class MoviesListFragment : Fragment(R.layout.fragment_movie_list) {
     }
 
     private fun initEditText() {
-        searchEditText?.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
-            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                val query = searchEditText?.text?.trim().toString()
-                loadSearchMovies(query)
-                return@OnKeyListener true
-            }
-            false
-        })
+        searchEditText?.setOnEditorActionListener { _, actionId, _ ->
+        if (actionId == EditorInfo.IME_ACTION_SEARCH){
+            val query = searchEditText?.text?.trim().toString()
+            loadSearchMovies(query)
+            return@setOnEditorActionListener true
+        }else
+            return@setOnEditorActionListener false
+        }
     }
 
     private fun loadSearchMovies(query: String) {
         searchJob?.cancel()
-
+        recyclerMovieList?.scrollToPosition(0)
         searchJob = lifecycleScope.launch {
             viewModel.searchMovies(query).collectLatest {
                 adapterMovies.submitData(it)
@@ -77,7 +78,7 @@ class MoviesListFragment : Fragment(R.layout.fragment_movie_list) {
 
     private fun loadPopularMovies() {
         searchJob?.cancel()
-
+        recyclerMovieList?.scrollToPosition(0)
         searchJob = lifecycleScope.launch {
             viewModel.popularMovies().collectLatest {
                 adapterMovies.submitData(it)
