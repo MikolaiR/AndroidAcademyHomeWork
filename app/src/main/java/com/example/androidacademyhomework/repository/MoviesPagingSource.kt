@@ -1,38 +1,19 @@
 package com.example.androidacademyhomework.repository
 
-import android.util.Log
-import androidx.paging.PagingSource
 import com.example.androidacademyhomework.data.model.MovieResult
 import com.example.androidacademyhomework.data.network.MovieApi
-import retrofit2.HttpException
-import java.io.IOException
 
-internal const val THE_MOVIE_DB_STARTING_PAGE_INDEX: Long = 1
+internal const val THE_MOVIE_DB_STARTING_PAGE_INDEX = 1
 
-class MoviesPagingSource(private val movieApi: MovieApi) :
-    PagingSource<Long, MovieResult>() {
-
-    override suspend fun load(params: LoadParams<Long>): LoadResult<Long, MovieResult> {
-        val position = params.key ?: THE_MOVIE_DB_STARTING_PAGE_INDEX
-        return try {
-            val movieResponse = movieApi.getPopularMoviesWithPaging(
-                page = position
-            )
-            val moviesList = movieResponse.results
-            val nextKey = if (movieResponse.page >= movieResponse.totalPages) {
-                null
-            } else {
-                position + 1
-            }
-            LoadResult.Page(
-                data = moviesList,
-                prevKey = if (position == THE_MOVIE_DB_STARTING_PAGE_INDEX) null else position - 1,
-                nextKey = nextKey
-            )
-        } catch (exception: IOException) {
-            return LoadResult.Error(exception)
-        } catch (exception: HttpException) {
-            return LoadResult.Error(exception)
-        }
+class MoviesPagingSource(
+    private val movieApi: MovieApi
+) : BasePagingSource<Int, MovieResult>() {
+    override suspend fun getPagingData(): List<MovieResult> {
+        val moviesApiResponse = movieApi.getPopularMoviesWithPaging(
+            page = position ?: THE_MOVIE_DB_STARTING_PAGE_INDEX
+        )
+        totalPages = moviesApiResponse.totalPages
+        startingPage = THE_MOVIE_DB_STARTING_PAGE_INDEX
+        return moviesApiResponse.results
     }
 }

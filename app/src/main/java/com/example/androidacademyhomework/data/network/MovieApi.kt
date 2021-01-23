@@ -3,19 +3,18 @@ package com.example.androidacademyhomework.data.network
 import com.example.androidacademyhomework.data.model.ActorsResponse
 import com.example.androidacademyhomework.data.model.DetailsMovie
 import com.example.androidacademyhomework.data.model.MoviesApiResponse
-import com.example.androidacademyhomework.data.model.MoviesSearchResponse
 import retrofit2.http.*
 
 interface MovieApi {
 
     @GET("movie/popular")
     suspend fun getPopularMoviesWithPaging(
-        @Query("page") page: Long
+        @Query("page") page: Int
     ): MoviesApiResponse
 
     @GET("search/movie")
     suspend fun getSearchMoviesWithPaging(
-        @Query("page") page: Long,
+        @Query("page") page: Int,
         @Query("query") query: String
     ): MoviesApiResponse
 
