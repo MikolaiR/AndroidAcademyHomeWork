@@ -20,6 +20,7 @@ import com.example.androidacademyhomework.BuildConfig
 import com.example.androidacademyhomework.R
 import com.example.androidacademyhomework.UI.MovieViewModelFactory
 import com.example.androidacademyhomework.data.model.Movie
+import com.example.androidacademyhomework.fullUrl
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -91,9 +92,8 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
         textViewDetailFragmentNameMove?.text = movie.title
         textViewDetailFragmentStory?.text = movie.overview
         imageViewDetailFragmentTitleBackground?.let {
-            val imagePath = "${BuildConfig.BASE_URL_FROM_IMAGE}${movie.backdrop}"
             Glide.with(requireContext())
-                .load(imagePath)
+                .load(movie.backdrop?.fullUrl())
                 .placeholder(R.drawable.loading_animation)
                 .error(R.drawable.error_image)
                 .into(it)

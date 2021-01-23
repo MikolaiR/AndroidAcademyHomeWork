@@ -11,6 +11,7 @@ import com.example.androidacademyhomework.BuildConfig
 import com.example.androidacademyhomework.R
 import com.example.androidacademyhomework.context
 import com.example.androidacademyhomework.data.model.MovieActors
+import com.example.androidacademyhomework.fullUrl
 
 class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
 
@@ -39,9 +40,8 @@ class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
         private val textViewNameActor = itemView.findViewById<TextView>(R.id.textViewNameActor)
 
         fun onBind(actor: MovieActors) {
-            val imagePath = "${BuildConfig.BASE_URL_FROM_IMAGE}${actor.profilePath}"
             Glide.with(context)
-                .load(imagePath)
+                .load(actor.profilePath?.fullUrl())
                 .placeholder(R.drawable.loading_animation)
                 .error(R.drawable.error_image)
                 .into(imageViewActor)

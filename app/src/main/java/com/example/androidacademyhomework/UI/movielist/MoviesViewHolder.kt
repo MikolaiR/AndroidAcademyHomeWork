@@ -10,6 +10,7 @@ import com.example.androidacademyhomework.BuildConfig
 import com.example.androidacademyhomework.R
 import com.example.androidacademyhomework.context
 import com.example.androidacademyhomework.data.model.Movie
+import com.example.androidacademyhomework.fullUrl
 
 class MoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -26,9 +27,8 @@ class MoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.findViewById<TextView>(R.id.textViewFilmDuration)
 
     fun onBind(movie: Movie) {
-        val imagePath = "${BuildConfig.BASE_URL_FROM_IMAGE}${movie.poster}"
         Glide.with(context)
-            .load(imagePath)
+            .load(movie.poster?.fullUrl())
             .placeholder(R.drawable.loading_animation)
             .error(R.drawable.error_image)
             .into(imageViewTitleBackground)

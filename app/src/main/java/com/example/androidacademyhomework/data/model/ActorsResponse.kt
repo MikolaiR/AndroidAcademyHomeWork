@@ -19,7 +19,7 @@ data class MovieActors(
 	@field:Json(name="name")
 	val name: String,
 	@field:Json(name="profile_path")
-	val profilePath: String,
+	val profilePath: String?,
 	val id: Int,
 	val adult: Boolean,
 	val order: Int
