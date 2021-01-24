@@ -7,7 +7,7 @@ import com.example.androidacademyhomework.data.model.*
 val RecyclerView.ViewHolder.context: Context
     get() = this.itemView.context
 
-fun createMovie(
+fun formatToMovie(
     movieDetails: DetailsMovie,
     actors: ActorsResponse?
 ): Movie {
