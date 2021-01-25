@@ -6,7 +6,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".UI.MovieListFragment">
+    tools:context=".ui.movielist.MoviesListFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutSearch"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_16"
+        app:errorTextColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/buttonViewMenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/buttonViewMenu"
+        app:layout_constraintTop_toTopOf="@id/buttonViewMenu">
+
+        <EditText
+            android:id="@+id/editTextSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/search"
+            android:imeOptions="actionSearch"
+            android:inputType="textNoSuggestions"
+            android:selectAllOnFocus="true"
+            android:textColor="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/buttonViewMenu"
@@ -17,7 +41,7 @@
         android:background="@android:color/transparent"
         android:drawableLeft="@drawable/ic_combined_shape"
         android:gravity="center"
-        android:text="@string/movies_list"
+        android:text="@string/get_popular_movies"
         android:textAppearance="@style/button_back"
         android:textSize="@dimen/sp_12"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,13 +51,25 @@
         android:id="@+id/recyclerMovieList"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
-        android:layout_marginTop="@dimen/dp_24"
-        tools:listitem="@layout/view_holder_movie"
         android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_24"
         android:layout_marginEnd="@dimen/dp_16"
-        app:layout_constraintTop_toBottomOf="@+id/buttonViewMenu"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonViewMenu"
+        tools:listitem="@layout/view_holder_movie" />
+
+    <ProgressBar
+        android:id="@+id/progressBarLoading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/movieListFragment"
-        android:name="com.example.androidacademyhomework.UI.MovieListFragment"
+        android:name="com.example.androidacademyhomework.ui.movielist.MoviesListFragment"
         android:label="MovieList"
         tools:layout="@layout/fragment_movie_list">
 
@@ -15,26 +15,24 @@
             app:destination="@id/movieDetailsFragment">
 
             <argument
-                android:name="movie"
-                app:argType="com.example.androidacademyhomework.data.Movie" />
-
+                android:name="movieId"
+                app:argType="integer" />
         </action>
 
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
-        android:name="com.example.androidacademyhomework.UI.MovieDetailsFragment"
+        android:name="com.example.androidacademyhomework.ui.moviedetails.MovieDetailsFragment"
         android:label="MovieDetails"
         tools:layout="@layout/fragment_movie_details">
 
         <argument
-            android:name="movie"
-            app:argType="com.example.androidacademyhomework.data.Movie" />
+            android:name="movieId"
+            app:argType="integer" />
 
         <action
             android:id="@+id/action_movieDetailsFragment_to_movieListFragment"
-            app:popUpTo="@id/movieListFragment">
-        </action>
+            app:popUpTo="@id/movieListFragment" />
     </fragment>
 
 </navigation>

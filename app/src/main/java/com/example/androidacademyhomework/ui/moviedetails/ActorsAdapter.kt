@@ -1,4 +1,4 @@
-package com.example.androidacademyhomework.adapters
+package com.example.androidacademyhomework.ui.moviedetails
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.androidacademyhomework.R
 import com.example.androidacademyhomework.context
-import com.example.androidacademyhomework.data.Actor
+import com.example.androidacademyhomework.data.model.MovieActor
+import com.example.androidacademyhomework.fullUrl
 
 class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
 
-    private var actors = listOf<Actor>()
+    private var actors = listOf<MovieActor>()
 
-    fun bindActors(newActors: List<Actor>) {
+    fun bindActors(newActors: List<MovieActor>) {
         actors = newActors
         notifyDataSetChanged()
     }
@@ -37,9 +38,9 @@ class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
         private val imageViewActor = itemView.findViewById<ImageView>(R.id.imageViewActor)
         private val textViewNameActor = itemView.findViewById<TextView>(R.id.textViewNameActor)
 
-        fun onBind(actor: Actor) {
+        fun onBind(actor: MovieActor) {
             Glide.with(context)
-                .load(actor.picture)
+                .load(actor.profilePath?.fullUrl())
                 .placeholder(R.drawable.loading_animation)
                 .error(R.drawable.error_image)
                 .into(imageViewActor)

@@ -1,14 +1,15 @@
-package com.example.androidacademyhomework.UI
+package com.example.androidacademyhomework.ui.moviedetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -16,9 +17,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.androidacademyhomework.R
-import com.example.androidacademyhomework.adapters.ActorsAdapter
+import com.example.androidacademyhomework.ui.MovieViewModelFactory
+import com.example.androidacademyhomework.data.model.Movie
+import com.example.androidacademyhomework.fullUrl
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-class MovieDetailsFragment : Fragment() {
+class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
 
     private var textViewDetailFragmentAgeLimit: TextView? = null
     private var textViewDetailFragmentNameMove: TextView? = null
@@ -31,21 +36,18 @@ class MovieDetailsFragment : Fragment() {
     private var recyclerForActors: RecyclerView? = null
 
     private val args: MovieDetailsFragmentArgs by navArgs()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_movie_details, container, false)
-    }
+    private lateinit var viewModel: MovieDetailsFragmentViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupViews(view)
-        initRecycler()
-        updateDataMovieForView()
-        updateData()
+
+        viewModel =
+            ViewModelProvider(this, MovieViewModelFactory.Injection.provideViewModelFactory())
+                .get(MovieDetailsFragmentViewModel::class.java)
+
+        loadAndUpdateMovie()
 
         view.findViewById<Button>(R.id.buttonViewBack).setOnClickListener {
             findNavController().navigate(R.id.action_movieDetailsFragment_to_movieListFragment)
@@ -61,37 +63,49 @@ class MovieDetailsFragment : Fragment() {
         }
     }
 
+    private fun loadAndUpdateMovie() {
+        lifecycleScope.launch {
+            viewModel.loadDetailsMovie(args.movieId).collect {
+                addDetailsMovieToViews(it)
+            }
+        }
+    }
+
     override fun onDetach() {
         clearViews()
 
         super.onDetach()
     }
 
-    private fun updateData() {
-        if (args.movie.actors.isEmpty()) {
-            textViewDetailFragmentCast?.visibility = View.GONE
-        } else {
-            textViewDetailFragmentCast?.visibility = View.VISIBLE
-            (recyclerForActors?.adapter as? ActorsAdapter)?.apply {
-                bindActors(args.movie.actors)
-            }
-        }
-    }
-
-    private fun updateDataMovieForView() {
-        textViewDetailFragmentAgeLimit?.text = getString(R.string.age_limit, args.movie.minimumAge)
-        textViewDetailFragmentMovieGenre?.text = args.movie.genres.joinToString { it.name }
-        ratingBarDetailsFragment?.rating = args.movie.ratings / 2
+    private fun addDetailsMovieToViews(movie: Movie) {
+        textViewDetailFragmentAgeLimit?.text = getString(R.string.age_limit, movie.minimumAge)
+        textViewDetailFragmentMovieGenre?.text = movie.genres.joinToString { it.name }
+        ratingBarDetailsFragment?.rating = if (movie.ratings != null) {
+            movie.ratings.div(2)
+        } else 0F
         textViewDetailFragmentReviews?.text =
-            getString(R.string.reviews, args.movie.numberOfRatings)
-        textViewDetailFragmentNameMove?.text = args.movie.title
-        textViewDetailFragmentStory?.text = args.movie.overview
+            getString(R.string.reviews, movie.numberOfRatings)
+        textViewDetailFragmentNameMove?.text = movie.title
+        textViewDetailFragmentStory?.text = movie.overview
         imageViewDetailFragmentTitleBackground?.let {
             Glide.with(requireContext())
-                .load(args.movie.backdrop)
+                .load(movie.backdrop?.fullUrl())
                 .placeholder(R.drawable.loading_animation)
                 .error(R.drawable.error_image)
                 .into(it)
+        }
+        if (movie.actors != null) {
+            if (movie.actors.isNotEmpty()) {
+                initRecycler()
+                textViewDetailFragmentCast?.isVisible = true
+                (recyclerForActors?.adapter as? ActorsAdapter)?.apply {
+                    bindActors(movie.actors)
+                }
+            } else {
+                textViewDetailFragmentCast?.isVisible = false
+            }
+        } else {
+            textViewDetailFragmentCast?.isVisible = false
         }
     }
 
