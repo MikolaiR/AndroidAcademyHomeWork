@@ -20,7 +20,6 @@ import com.example.androidacademyhomework.R
 import com.example.androidacademyhomework.ui.MovieViewModelFactory
 import com.example.androidacademyhomework.data.model.Movie
 import com.example.androidacademyhomework.fullUrl
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -67,7 +66,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
     private fun loadAndUpdateMovie() {
         lifecycleScope.launch {
             viewModel.loadDetailsMovie(args.movieId).collect {
-                updateData(it)
+                addDetailsMovieToViews(it)
             }
         }
     }
@@ -78,7 +77,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
         super.onDetach()
     }
 
-    private fun updateData(movie: Movie) {
+    private fun addDetailsMovieToViews(movie: Movie) {
         textViewDetailFragmentAgeLimit?.text = getString(R.string.age_limit, movie.minimumAge)
         textViewDetailFragmentMovieGenre?.text = movie.genres.joinToString { it.name }
         ratingBarDetailsFragment?.rating = if (movie.ratings != null) {
@@ -105,6 +104,8 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
             } else {
                 textViewDetailFragmentCast?.isVisible = false
             }
+        } else {
+            textViewDetailFragmentCast?.isVisible = false
         }
     }
 

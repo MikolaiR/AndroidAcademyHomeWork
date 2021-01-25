@@ -50,10 +50,10 @@ class MoviesListFragment : Fragment(R.layout.fragment_movie_list) {
         initRecycler()
         initEditText()
         if (viewModel.isFirstStart.value) {
-            loadPopularMovies()
+            addPopularMoviesToAdapter()
         }
         view.findViewById<Button>(R.id.buttonViewMenu).setOnClickListener {
-            loadPopularMovies()
+            addPopularMoviesToAdapter()
             searchEditText?.text?.clear()
         }
     }
@@ -62,14 +62,14 @@ class MoviesListFragment : Fragment(R.layout.fragment_movie_list) {
         searchEditText?.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val query = searchEditText?.text?.trim().toString()
-                loadSearchMovies(query)
+                addSearchMoviesToAdapter(query)
                 return@setOnEditorActionListener true
             } else
                 return@setOnEditorActionListener false
         }
     }
 
-    private fun loadSearchMovies(query: String) {
+    private fun addSearchMoviesToAdapter(query: String) {
         searchJob?.cancel()
         recyclerMovieList?.scrollToPosition(0)
         searchJob = lifecycleScope.launch {
@@ -79,7 +79,7 @@ class MoviesListFragment : Fragment(R.layout.fragment_movie_list) {
         }
     }
 
-    private fun loadPopularMovies() {
+    private fun addPopularMoviesToAdapter() {
         searchJob?.cancel()
         recyclerMovieList?.scrollToPosition(0)
         searchJob = lifecycleScope.launch {
